@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-time Clock</title>
+    <style>
+      #clock {
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+
+    <script>
+        function updateClock() {
+          var currentTime = new Date();
+          var currentHours = currentTime.getHours();
+          var currentMinutes = currentTime.getMinutes();
+          var currentSeconds = currentTime.getSeconds();
+          var currentDate = currentTime.getDate();
+          var currentMonth = currentTime.getMonth();
+          var currentYear = currentTime.getFullYear();
+          var monthNames = ["January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"];
+          currentMonth = monthNames[currentMonth];
+          // Pad the minutes and seconds with leading zeros, if required
+          currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+          currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+      
+          // Choose either "AM" or "PM" as appropriate
+          var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+      
+          // Convert the hours component to 12-hour format if needed
+          currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+      
+          // Convert an hours component of "0" to "12"
+          currentHours = (currentHours == 0) ? 12 : currentHours;
+      
+          // Compose the string for display
+          var currentDateString = currentMonth + " " + currentDate + ", " + currentYear;
+          var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+          
+      
+          // Update the time and date display
+          document.getElementById("clock").innerHTML = currentDateString + " " + currentTimeString;
+        }
+      
+        setInterval(updateClock, 1000);
+      </script>
+      
+  </body>
+</html>
